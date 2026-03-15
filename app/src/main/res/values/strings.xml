@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Spinner App</string>
+    <string-array name="anime_list">
+        <item>Hunter X Hunter</item>
+        <item>Dragon Ball</item>
+        <item>Jujutsu Kaisen</item>
+        <item>Delicious in Dungeon</item>
+        <item>Frieren: Beyond Journey\'s End</item>
+        <item>Fullmetal Alchemist: Brotherhood</item>
+    </string-array>
+</resources>
