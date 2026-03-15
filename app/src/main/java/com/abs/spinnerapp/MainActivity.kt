@@ -28,8 +28,6 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-
         setupSpinner()
 
     }
@@ -53,7 +51,6 @@ class MainActivity : AppCompatActivity() {
                 }
                 val selectedItem = parent?.getItemAtPosition(position).toString()
                 performSearch(selectedItem)
-
             }
             override fun onNothingSelected(parent: AdapterView<*>?){}
         }
