@@ -1,7 +1,6 @@
 package com.abs.spinnerapp
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -9,14 +8,12 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.net.toUri
 
 class MainActivity : AppCompatActivity() {
 
-    private var isInitialLoad = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,12 +42,10 @@ class MainActivity : AppCompatActivity() {
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long){
-                if (isInitialLoad) {
-                    isInitialLoad = false
-                    return
+                if (position != 0) {
+                    val selectedItem = parent?.getItemAtPosition(position).toString()
+                    performSearch(selectedItem)
                 }
-                val selectedItem = parent?.getItemAtPosition(position).toString()
-                performSearch(selectedItem)
             }
             override fun onNothingSelected(parent: AdapterView<*>?){}
         }
