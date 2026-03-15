@@ -1,6 +1,10 @@
 package com.abs.spinnerapp
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.activity.enableEdgeToEdge
@@ -8,8 +12,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.net.toUri
 
 class MainActivity : AppCompatActivity() {
+
+    private var isInitialLoad = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -22,7 +30,11 @@ class MainActivity : AppCompatActivity() {
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
+        setupSpinner()
 
+    }
+
+    private fun setupSpinner(){
         val spinner = findViewById<Spinner>(R.id.anime_list)
         ArrayAdapter.createFromResource(
             this,
@@ -33,5 +45,22 @@ class MainActivity : AppCompatActivity() {
             spinner.adapter =adapter
         }
 
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long){
+                if (isInitialLoad) {
+                    isInitialLoad = false
+                    return
+                }
+                val selectedItem = parent?.getItemAtPosition(position).toString()
+                performSearch(selectedItem)
+
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?){}
+        }
+    }
+    private fun performSearch(item: String){
+        val url = getString(R.string.search_url_template, item)
+        val intent = Intent(Intent.ACTION_VIEW,url.toUri())
+        startActivity(intent)
     }
 }

@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">Spinner App</string>
+    <string name="search_url_template">https://www.google.com/search?q=%s</string>
     <string-array name="anime_list">
         <item>Hunter X Hunter</item>
-        <item>Dragon Ball</item>
+        <item>Dragon Ball Z</item>
         <item>Jujutsu Kaisen</item>
         <item>Delicious in Dungeon</item>
         <item>Frieren: Beyond Journey\'s End</item>
